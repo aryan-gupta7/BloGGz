@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ text }} a Blog - BloGGz</title>
+</head>
+<body>
+    <h1>BloGGz</h1>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+        <li>{{ messages[-1] }}</li>
+    </ul>
+    {% endif %}
+    {% endwith %}
+    <h3>{{ text }} Blog</h3>
+    <form action="#" method="post">
+        {% if blog %}
+        <input type="text" name="name" value="{{ blog.name }}" placeholder="Blog Name">
+        {% else %}
+        <input type="text" name="name" placeholder="Blog Name">
+        {% endif %}
+        <input type="submit" value="{{ text }}">
+    </form>
+</body>
+</html>

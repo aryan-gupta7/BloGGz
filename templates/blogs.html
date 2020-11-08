@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blogs - BloGGz</title>
+    <link rel="stylesheet" href="/static/styles/style.css">
+</head>
+<body>
+    <h1>BloGGz</h1>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+        <li>{{ messages[-1] }}</li>
+    </ul>
+    {% endif %}
+    {% endwith %}
+    {% if no_blogs == 0 %}
+    <p>{{ user.full_name.split()[0] }}, You haven't created any blogs yet.</p>
+    <a href="/create_blog"><button>Create a blog now.</button></a>
+    {% else %}
+    <p>My Blogs</p>
+    <table style="width: 70%;">
+        <tr>
+            <th>Name</th>
+            <th>Posts</th>
+        </tr>
+        {% for blog in users_blogs %}
+        <tr>
+            <td>{{ blog.name }}</td>
+            {% if blog.posts %}
+            <td>
+            {% for post in blog.posts %}
+            <a href="/view_post/{{ post.id }}">{{ post.title }}</a>, 
+            {% endfor %}
+            </td>
+            {% else %}
+            <td>No Posts yet</td>
+            {% endif %}
+            <td><a href="/view_blog/{{ blog.id }}"><button>View blog</button></a></td>
+            <td><a href="/edit_blog/{{ blog.id }}"><button>Edit</button></a></td>
+            <td><a href="/delete_blog/{{ blog.id }}"><button>Delete</button></a></td>
+            <td><a href="/create_post_in_blog/{{ blog.id }}"><button>Add a post</button></a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/create_blog"><button>Create a blog</button></a>
+    <a href="/home"><button>Back to home</button></a>
+    {% endif %}
+</body>
+</html>

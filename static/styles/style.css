@@ -1,0 +1,14 @@
+*
+{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.heading
+{
+    font-size: 50px;
+    margin: 10px;
+    text-align: center;
+}
+input
+{
+    margin: 5px;
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts - BloGGz</title>
+    <link rel="stylesheet" href="/static/styles/style.css">
+</head>
+<body>
+    <h1>BloGGz</h1>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+        <li>{{ messages[-1] }}</li>
+    </ul>
+    {% endif %}
+    {% endwith %}
+    {% if no_posts == 0 %}
+    <p>{{ user.full_name.split()[0] }}, You haven't created any posts yet.</p>
+    <a href="/create_post"><button>Create a posts now.</button></a>
+    {% else %}
+    <h3>My Posts</h3>
+    <table style="width: 100%;">
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Slug</th>
+            <th>Tagline</th>
+            <th>Content</th>
+            <th>Date Posted</th>
+        </tr>
+        {% for post in users_posts %}
+        <tr>
+            <td>{{ post.id }}</td>
+            <td>{{ post.title }}</td>
+            <td>{{ post.slug }}</td>
+            <td>{{ post.tagline }}</td>
+            <td>{{ post.content }}</td>
+            <td>{{ post.date_pub }}</td>
+            <td><a href="/view_post/{{ post.id }}"><button>View Post</button></a></td>
+            <td><a href="/edit_post/{{ post.id }}"><button>Edit</button></a></td>
+            <td><a href="/delete_post/{{ post.id }}"><button>Delete</button></a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>

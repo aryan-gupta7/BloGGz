@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ text }} a Post - BloGGz</title>
+</head>
+<body>
+    <h1>BloGGz</h1>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+        <li>{{ messages[-1] }}</li>
+    </ul>
+    {% endif %}
+    {% endwith %}
+    <h3>{{ text }} Post</h3>
+    {% if post %}
+    <form action="#" method="post">
+        <input type="text" name="title" placeholder="Title" required value="{{ post.title }}">
+        <br>
+        <input type="text" name="slug" placeholder="Slug" required value="{{ post.slug }}">
+        <br>
+        <input type="text" name="tagline" placeholder="Tagline" required value="{{ post.tagline }}">
+        <br>
+        <textarea type="text" name="content" placeholder="Content" required>{{ post.content }}</textarea>
+        <br>
+        <input type="submit" value="{{ text }}">
+    {% else %}
+    <form action="#" method="post">
+        <input type="text" name="title" placeholder="Title">
+        <br>
+        <input type="text" name="slug" placeholder="Slug">
+        <br>
+        <input type="text" name="tagline" placeholder="Tagline">
+        <br>
+        <textarea type="text" name="content" placeholder="Content"></textarea>
+        <br>
+        <input type="submit" value="{{ text }}">
+    </form>
+    {% endif %}
+</body>
+</html>

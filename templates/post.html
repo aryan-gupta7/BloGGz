@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{post.title}} - BloGGz</title>
+    <link rel="stylesheet" href="/static/styles/style.css">
+</head>
+<body>
+    <h1>BloGGz</h1>
+    <h3>Post</h3>
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.tagline }}</p>
+    <p>{{ post.content }}</p>
+    <p>Posted by {{ post.author.full_name }} on {{ post.date_pub }}</p>
+
+    <a href="/all_posts">Back to posts</a>
+    <br>
+    <a href="/all_blogs">Go to posts</a>
+    <a href="/home">Home</a>
+
+</body>
+</html>

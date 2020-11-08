@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ blog.name }} - BloGGz</title>
+    <link rel="stylesheet" href="/static/styles/style.css">
+</head>
+<body>
+    <h1>BloGGz</h1>
+    <h3>Blog</h3>
+    <h2>{{ blog.name }}</h2>
+    {% if blog.posts %}
+        {% for post in blog.posts %}
+            <a href="/view_blog/{{ post.id }}">{{ post.title }}</a>, 
+        {% endfor %}
+    {% else %}
+        <p>No posts yet.</p>
+        <a href="/create_post_in_blog/{{ blog.id }}"></a>
+    {% endif %}
+</body>
+</html>
