@@ -1,9 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_sqlalchemy import SQLAlchemy
-# import random
-# import smtplib
 import datetime
 import os
+#importing libs
 
 
 app = Flask(__name__)
@@ -11,7 +10,7 @@ app.secret_key = os.urandom(24)
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ['DATABASE_URL']
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 db = SQLAlchemy(app)
-
+#pre-loading
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -44,36 +43,8 @@ class Post(db.Model):
 
     def __repr__(self):
         return f"<Post '{self.title}'>"
-    
 
-# GMAIL_ID = ""
-# GMAIL_PSSWD = ""
-
-# def send_mail(to,sub,msg):
-#     s = smtplib.SMTP("smtp.gmail.com", 587)
-#     s.starttls()
-#     s.login(GMAIL_ID, GMAIL_PSSWD)
-#     s.sendmail(GMAIL_ID, to, f"Subject: {sub}\n\n{msg}")
-#     s.quit()
-
-# def create_otp():
-#     nums = [0,1,2,3,4,5,6,7,8,9]
-#     otp = f"{random.choice(nums)}{random.choice(nums)}{random.choice(nums)}{random.choice(nums)}"
-#     return otp
-
-# def check_otp(correct_otp,entered_otp):
-#     return correct_otp == entered_otp
-
-# def send_otp(email,otp):
-#     # print(otp)
-#     # send_mail(email,"OTP from BloGGz",f"Hey there, your OTP for BloGGz is {otp}")
-#     pass
-
-# user = User(username='aryan',email="example@example.com",full_name="Aryan Gupta",password="@aryan77")
-# db.session.add(user)
-# db.session.commit()
-
-
+#classes
 def unique_checker(username,email):
     for user_data in User.query.all():
         if user_data.username==username or user_data.email==email:
@@ -91,6 +62,7 @@ def check_user_pass(username,password):
         return True
     else:
         return False
+#functions
 
 @app.route("/",methods=['GET','POST'])
 def main():
@@ -320,8 +292,9 @@ def view_blog(id):
 def view_post(id):
     post_to_see = Post.query.filter_by(id=id).first()
     return render_template('post.html',post=post_to_see)
-
+#routes
 
 if __name__ == "__main__":
     db.create_all()
     app.run()
+    #main
